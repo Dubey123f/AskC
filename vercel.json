@@ -1,5 +1,13 @@
 {
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
+    }
+  },
   "functions": {
+    "api/*": {
+      "runtime": "nodejs18.x"
+    },
     "middleware.js": {
       "runtime": "nodejs18.x"
     }

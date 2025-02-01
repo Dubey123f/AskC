@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import {Button} from '@/components/ui/Button';
+import {Button} from '@/components/Button';
 import Link from 'next/link';
 const topics=[
     { 
@@ -29,7 +29,7 @@ const topics=[
         title: 'C++', 
         image: '/images/c++.png', 
         desc: 'C++ is a powerful, high-performance language often used for game development, system programming, and high-performance computing.', 
-     slug: 'C Plus Plus-new',
+     slug: 'Cpp-new',
     
     },
       { 

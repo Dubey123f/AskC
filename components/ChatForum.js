@@ -83,11 +83,12 @@ function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 const ChatForum = ({clerkUser,slug}) => {
-const apiKey = 't4dehsg52byh';
+const apiKey = process.env.STREAM_API_KEY;
 const userId = clerkUser.id;
 const userName = clerkUser.name;
 
 const userToken = clerkUser.token;
+console.log(userToken);
 
 const user = {
   id: userId,
@@ -131,13 +132,6 @@ return (
 }
 
 export default ChatForum
-
-
-
-
-
-
-
 
 
 

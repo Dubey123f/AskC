@@ -44,8 +44,8 @@ export default function Navbar() {
       <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
         <div className="bg-white pt-2 pb-4 space-y-6">
           <Link href="/" className="text-gray-900 block px-4 py-2 hover:bg-gray-100">Home</Link>
-          <Link href="/about" className="text-gray-900 block px-4 py-2 hover:bg-gray-100">About</Link>
-          <Link href="/contact" className="text-gray-900 block px-4 py-2 hover:bg-gray-100">Contact</Link>
+          <Link href="/forums" className="text-gray-900 block px-4 py-2 hover:bg-gray-100">Forums</Link>
+          <Link href="/chat" className="text-gray-900 block px-4 py-2 hover:bg-gray-100">UserChat</Link>
           <li>
           <UserButton />
           

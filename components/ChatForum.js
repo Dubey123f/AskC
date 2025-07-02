@@ -1,137 +1,147 @@
 
 
 // 'use client'
+// import React from 'react'
 // import { useState, useEffect } from 'react';
 
 // import { useCreateChatClient, Chat, Channel, ChannelHeader, MessageInput, MessageList, Thread, Window } from 'stream-chat-react';
 // import { useUser } from '@clerk/nextjs';
 // import 'stream-chat-react/dist/css/v2/index.css';
+// function capitalize(str) {
+//   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+// }
+// const ChatForum = ({clerkUser,slug}) => {
+// const apiKey = process.env.STREAM_API_KEY;
+// const userId = clerkUser.id;
+// const userName = clerkUser.name;
 
-// const apiKey = 't4dehsg52byh';
+// const userToken = clerkUser.token;
+// console.log(userToken);
 
-// const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNlcl8yc0RWVlZzSllwTkY0RUhXdGtrTUd2WW82eXAifQ.n-HJZ4hanyAgrPhleCdRHIu82I0OtZgbRoixCT0nKCE';
+// const user = {
+//   id: userId,
+//   name: userName,
+//   image: `https://getstream.io/random_png/?name=${userName}`,
+// };
+// const [channel, setChannel] = useState();
+// const client = useCreateChatClient({
+//   apiKey,
+//   tokenOrProvider: userToken,
+//   userData: user,
+// });
 
+// useEffect(() => {
+//   if (!client) return;
 
-
-// export default  function ChatForum({slug}){
-//   const {isLoaded,clerkUser} = useUser();
-// const[user,setUser] = useState();
-//   useEffect(() => {
-//     if(!isLoaded) {
-//     const userId = clerkUser.user?.id;
-//     const userName = clerkUser.user?.name;
-//     const user = {
-//       id: userId,
-//       name: userName,6
-//       image: `https://getstream.io/random_png/?name=${userName}`,
-//     };
-//     setUser(user);
-//   }
-//   }, [isLoaded]);
-  
-//     function toTitleCase(str) {
-//         return str.replace(
-//           /\w\S*/g,
-//           (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
-//         );
-//       }
-//   const [channel, setChannel] = useState();
-//   const client = useCreateChatClient({
-//     apiKey,
-//     tokenOrProvider: userToken,
-//     userData: user,
+//   const channel = client.channel('messaging', slug, {
+//     image: 'https://getstream.io/random_png/?name=react',
+//     name: capitalize(slug) + ' Discussion',
+//     members: [userId],
 //   });
 
-//   useEffect(() => {
-//     if (!client) return;
-//     const sanitizedSlug = slug.replace(/[^\w-]/g, '-');
+//   setChannel(channel);
+//   // channel.addMembers([userId]);
+// }, [client, slug, userId]);
 
-//     const channel = client.channel('messaging', sanitizedSlug, {
-//       image: 'https://getstream.io/random_png/?name=react',
-//       name: toTitleCase(sanitizedSlug.replace(/-/g, " ")) + 'Discussion',
-//       members: [userId],
-//     });
+// if (!client) return <div>Setting up client & connection...</div>;
 
-//     setChannel(channel);
-//   }, [client]);
+// return (
+//   <Chat client={client}>
+//     <Channel channel={channel}>
+//       <Window>
+//         <ChannelHeader />
+//         <MessageList />
+//         <MessageInput />
+//       </Window>
+//       <Thread />
+//     </Channel>
+//   </Chat>
+// );
+// }
 
-//   if (!client) return <div>Setting up client & connection...</div>;
-
-//   return (
-//     <Chat client={client}>
-//       <Channel channel={channel}>
-//         <Window>
-//           <ChannelHeader />
-//           <MessageList />
-//           <MessageInput />
-//         </Window>
-//         <Thread />
-//       </Channel>
-//     </Chat>
-//   );
-// };
-
-
+// export default ChatForum
 'use client'
-import React from 'react'
-import { useState, useEffect } from 'react';
-
-import { useCreateChatClient, Chat, Channel, ChannelHeader, MessageInput, MessageList, Thread, Window } from 'stream-chat-react';
+import React, { useState, useEffect } from 'react';
+import { 
+  useCreateChatClient, 
+  Chat, 
+  Channel, 
+  ChannelHeader, 
+  MessageInput, 
+  MessageList, 
+  Thread, 
+  Window 
+} from 'stream-chat-react';
 import { useUser } from '@clerk/nextjs';
 import 'stream-chat-react/dist/css/v2/index.css';
+
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
-const ChatForum = ({clerkUser,slug}) => {
-const apiKey = process.env.STREAM_API_KEY;
-const userId = clerkUser.id;
-const userName = clerkUser.name;
 
-const userToken = clerkUser.token;
-console.log(userToken);
+const ChatForum = ({ clerkUser, slug }) => {
+  const apiKey = process.env.STREAM_API_KEY;
+  const userId = clerkUser.id;
+  const userName = clerkUser.name;
+  const userToken = clerkUser.token;
 
-const user = {
-  id: userId,
-  name: userName,
-  image: `https://getstream.io/random_png/?name=${userName}`,
-};
-const [channel, setChannel] = useState();
-const client = useCreateChatClient({
-  apiKey,
-  tokenOrProvider: userToken,
-  userData: user,
-});
+  const user = {
+    id: userId,
+    name: userName,
+    image: `https://getstream.io/random_png/?name=${userName}`,
+  };
 
-useEffect(() => {
-  if (!client) return;
-
-  const channel = client.channel('messaging', slug, {
-    image: 'https://getstream.io/random_png/?name=react',
-    name: capitalize(slug) + ' Discussion',
-    members: [userId],
+  const [channel, setChannel] = useState();
+  const client = useCreateChatClient({
+    apiKey,
+    tokenOrProvider: userToken,
+    userData: user,
   });
 
-  setChannel(channel);
-  // channel.addMembers([userId]);
-}, [client, slug, userId]);
+  useEffect(() => {
+    if (!client) return;
 
-if (!client) return <div>Setting up client & connection...</div>;
+    const initChannel = async () => {
+      const c = client.channel('messaging', slug, {
+        image: 'https://getstream.io/random_png/?name=react',
+        name: capitalize(slug) + ' Discussion',
+        members: [userId],
+      });
+      await c.watch();
+      setChannel(c);
+    };
 
-return (
-  <Chat client={client}>
-    <Channel channel={channel}>
-      <Window>
-        <ChannelHeader />
-        <MessageList />
-        <MessageInput />
-      </Window>
-      <Thread />
-    </Channel>
-  </Chat>
-);
-}
+    initChannel();
+  }, [client, slug, userId]);
 
-export default ChatForum
+  if (!client || !channel) {
+    return (
+      <div className="flex items-center justify-center h-full text-gray-500">
+        Setting up chat...
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col w-full h-screen md:h-[80vh] bg-white">
+      <Chat client={client} theme="messaging light">
+        <Channel channel={channel}>
+          <div className="flex flex-col md:flex-row h-full">
+            <Window>
+              <ChannelHeader />
+              <MessageList />
+              <MessageInput />
+            </Window>
+            <Thread />
+          </div>
+        </Channel>
+      </Chat>
+    </div>
+  );
+};
+
+export default ChatForum;
+
 
 
 
